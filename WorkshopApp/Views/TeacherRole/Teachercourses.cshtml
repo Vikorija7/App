@@ -1,0 +1,81 @@
+﻿@model WorkshopApp.ViewModels.CourseFilterViewModel
+
+@{ ViewData["Title"] = "Index"; }
+
+
+<h1>Проф. @Model.Teacher.FullName</h1>
+<h4>Предмети</h4>
+
+<dd class="col-sm-10">
+    <table class="table">
+        <tr>
+            <th>Наслов</th>
+            <th>Кредити</th>
+            <th>Семестар</th>
+            <th>Програма</th>
+            <th>Ниво</th>
+
+        </tr>
+        @if (Model.Teacher.FirstCourses != null)
+        {
+            foreach (var item in Model.Teacher.FirstCourses)
+            {
+
+<tr>
+    <td nowrap="nowrap">
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Credits)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Semester)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Programme)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EducationLevel)
+    </td>
+
+    <td nowrap="nowrap">
+        <a asp-controller="TeacherRole" asp-action="EnrollmentsCourse" asp-route-id="@item.Id">Студенти</a>
+    </td>
+</tr>
+}
+}
+
+        @if (Model.Teacher.SecondCourses != null)
+        {
+            foreach (var item in Model.Teacher.SecondCourses)
+            {
+<tr>
+    <td nowrap="nowrap">
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Credits)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Semester)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Programme)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EducationLevel)
+    </td>
+
+    <td nowrap="nowrap">
+        <a asp-controller="Courses" asp-action="TeacherRole" asp-route-id="@item.Id">Студенти</a> 
+    </td>
+</tr>
+}
+}
+    </table>
+</dd>
+<div>
+
+    <a asp-action="Index">Назад кон листата</a>
+</div>
+

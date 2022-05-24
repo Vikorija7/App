@@ -1,0 +1,44 @@
+﻿@model WorkshopApp.Models.Student
+
+<h4>@Model.FullName , @Model.StudentId</h4>
+<hr />
+<h6>Предмети</h6>
+
+
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Наслов</th>
+                    <th>Оценка</th>
+                    <th>Семестар</th>
+                    <th>Поен од испит</th>
+                </tr>
+                @foreach (var item in Model.Courses)
+                {
+            <tr>
+                <td>
+                    <a asp-controller="Courses" asp-action="Details" asp-route-id="@item.Course.Id">@Html.DisplayFor(modelItem => item.Course.Title)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Semester)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExamPoints)
+                </td>
+
+                <td>
+                    <a asp-controller="Enrollments" asp-action="StudentEdit" asp-route-id="@item.Id">Промени</a> |
+                    <a asp-controller="Enrollments" asp-action="Details" asp-route-id="@item.Id">Детали</a> |
+                    <a asp-controller="Enrollments" asp-action="Delete" asp-route-id="@item.Id">Избриши</a>
+                </td>
+            </tr>}
+            </table>
+        </dd>
+    
+
+<div>
+    <a asp-action="Index">Назад кон листата</a>
+</div>

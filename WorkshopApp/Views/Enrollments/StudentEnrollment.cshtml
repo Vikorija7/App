@@ -1,0 +1,62 @@
+﻿@model WorkshopApp.ViewModels.EnrollStudent
+
+<h1>Запиши студенти</h1>
+<hr />                                  
+<form asp-action="StudentEnrollment">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+       <p> Предмет: <select asp-for="CourseId" asp-items="Model.Courses">
+    </select>
+    <option value=""></option></p>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <div class="form-group">
+            <label asp-for="SelectedStudents" class="control-label"></label>
+            <select asp-for="SelectedStudents" class="form-control js-example-basic-multiple" asp-items="Model.StudentsList">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="Enrollments.Year" class="control-label"></label>
+        <input asp-for="Enrollments.Year" class="form-control" />
+        <span asp-validation-for="Enrollments.Year" class="text-danger"></span>
+    </div>
+    <br />
+    <hr />
+    <div class="form-group">
+        <label asp-for="Enrollments.Semester" class="control-label"></label>
+        <input asp-for="Enrollments.Semester" class="form-control" />
+        <span asp-validation-for="Enrollments.Semester" class="text-danger"></span>
+    </div>
+
+    <div class="form-group col-md-12">
+        <hr />
+        <input type="submit" value="Зачувај" class="btn btn-secondary" />
+    </div>
+</div>
+</form>
+
+
+<div>
+    <a asp-action="Index">Назад кон листата</a>
+</div>
+
+
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#SelectedStudents").select2();
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#CourseId").select2();
+        });
+    </script>
+}

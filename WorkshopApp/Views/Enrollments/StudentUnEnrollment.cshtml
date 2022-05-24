@@ -1,0 +1,75 @@
+﻿@model WorkshopApp.ViewModels.UnEnrollStudents
+
+@{ ViewData["Title"] = "Отпиши студенти"; }
+
+<h2>Отпиши студенти</h2>
+<hr />
+<form asp-action="StudentUnEnrollment" method="get">
+    Предмет: <select asp-for="CourseId" asp-items="Model.CoursesList">
+        <option value=""></option>
+    </select>
+    Година: <select asp-for="Year" asp-items="Model.Years">
+        <option value=""></option>
+    </select>
+    Семестар: <select asp-for="Semester" asp-items="Model.Semesters">
+        <option value=""></option>
+    </select>
+</form>
+<hr />
+<div class="row">
+    <form asp-action="StudentUnEnrollment">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label asp-for="SelectedEnrollments" class="control-label"></label>
+                <select asp-for="SelectedEnrollments" class="form-control js-example-basic-multiple" asp-items="Model.Enrollments">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-auto">
+            <div class="form-group">
+                <label asp-for="FinishDate" class="control-label"></label>
+                <input asp-for="FinishDate" class="form-control" />
+                <span asp-validation-for="FinishDate" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="CourseId" class="control-label"></label>
+                <input asp-for="CourseId" class="form-control" />
+                <span asp-validation-for="CourseId" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="Year" class="control-label"></label>
+                <input asp-for="Year" class="form-control" />
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="Semester" class="control-label"></label>
+                <input asp-for="Semester" class="form-control" />
+                <span asp-validation-for="Semester" class="text-danger"></span>
+            </div>
+
+        </div>
+        <div class="form-group col-md-12">
+            <hr />
+            <input type="submit" value="Отпиши избрани" class="btn btn-secondary" />
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index">Назад кон студентите</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script>$(document).ready(function () {
+            $("#CourseId").select2();
+            $("#SelectedEnrollments").select2();
+            $('#CourseId,#Semester,#Year').change(function () {
+                this.form.submit();
+            });
+        });</script>
+}

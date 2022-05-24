@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <title>@ViewData["Title"] - ФЕИТ</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class=" navbar navbar-dark bg-dark navbar navbar-expand-sm navbar-toggleable-sm  border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ФЕИТ</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                @if (User.Identity.IsAuthenticated)
+                {
+    @if (User.IsInRole("Admin"))
+    {
+<a asp-area="" asp-controller="Courses" asp-action="Index" class="navbar-brand"></a>}
+                    @if (User.IsInRole("Teacher"))
+                    {
+    <a asp-area="" asp-controller="Teacher" asp-action="Courses" class="navbar-brand">Феит</a>}
+                                    @if (User.IsInRole("Student"))
+                                    {
+                    <a asp-area="" asp-controller="Student" asp-action="Enrollments" class="navbar-brand"></a>} }
+                                else
+                                {
+                    <a asp-area="" asp-controller="Account" asp-action="Login" class="navbar-brand"></a>}
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (User.IsInRole("Admin"))
+                        {
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Почетна</a>
+            </li>
+                          <li class="nav-item">
+                           <a class="nav-link text-light" asp-area="" asp-controller="Students" asp-action="Index">Студенти</a>
+                          </li>
+                          <li class="nav-item">
+                          <a class="nav-link text-light" asp-area="" asp-controller="Teachers" asp-action="Index">Професори</a>
+                          </li>
+                          <li class="nav-item">
+                          <a class="nav-link text-light" asp-area="" asp-controller="Courses" asp-action="Index">Предмети</a>
+                          </li>
+                          <li class="nav-item">
+                          <a class="nav-link text-light" asp-area="" asp-controller="Enrollments" asp-action="Index">Запишани студенти</a>
+                          </li>
+}
+                        @if (User.IsInRole("Teacher"))
+                        {
+            <li><a asp-area="" asp-controller="Teachers" asp-action="Teachercourses">Мои предмети</a></li>
+}
+                        @if (User.IsInRole("Student"))
+                        {
+            <li><a asp-area="" asp-controller="Students" asp-action="CoursesOfStudent">Мои предмети</a></li>}
+                    </ul>
+                    <div class=" float-right pull-right">
+                        <ul class="nav navbar-nav">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li><a asp-area="" asp-controller="Account" asp-action="UserDetails">@(User.Identity.Name)</a></li>
+                                <li><a asp-area="" asp-controller="Account" asp-action="Logout">Одјави се</a></li> 
+                             }
+                             else
+                              {
+                                <li><a asp-area="" asp-controller="Account" asp-action="Login">Најава</a></li>}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <partial name="_CookieConsentPartial" />
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted navbar-dark bg-dark">
+        <div class="container">
+            &copy; 2022 - ФЕИТ-апликација - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+            crossorigin="anonymous"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"></script>
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

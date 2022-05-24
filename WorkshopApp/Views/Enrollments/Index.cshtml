@@ -1,0 +1,86 @@
+﻿@model WorkshopApp.ViewModels.EnrollmentFilterViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Запишани студенти</h1>
+<hr />
+
+<form asp-action="Index" method="get">
+    Индекс: <input type="text" asp-for="SearchIndex" />
+    Наслов на предмет: <input type="text" asp-for="SearchTitle" />
+    Година: <select asp-for="SearchYear" asp-items="Model.Years">
+        <option value=""></option>
+    </select>
+    Семестар: <select asp-for="SearchSemester" asp-items="Model.Semesters">
+        <option value=""></option>
+    </select>
+    <input type="submit" value="Филтер" />
+</form>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Students[0].StudentId)
+            </th>
+            <th>
+                Студенти
+            </th>
+            <th>
+                Предмети
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Courses[0].Semester)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Enrollments[0].Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Enrollments[0].Grade)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.Enrollments[0].FinishDate)
+            </th>
+
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Enrollments)
+        {
+        <tr>
+            <td nowrap="nowrap">
+                @Html.DisplayFor(modelItem => item.Student.StudentId)
+            </td>
+            <td nowrap="nowrap">
+                @Html.DisplayFor(modelItem => item.Student.FullName)
+            </td>
+            <td nowrap="nowrap">
+                @Html.DisplayFor(modelItem => item.Course.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Semester)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinishDate)
+            </td>
+            <td nowrap="nowrap">
+                <a asp-action="Edit" asp-route-id="@item.Id">Промени</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Детали</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Избриши</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<hr />
+<span><a asp-action="StudentEnrollment">Запиши студенти</a>  |  <a asp-action="StudentUnEnrollment">Отпиши студенти</a></span>

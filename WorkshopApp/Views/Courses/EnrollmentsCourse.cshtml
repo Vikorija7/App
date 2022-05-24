@@ -1,0 +1,52 @@
+﻿@model WorkshopApp.Models.Course
+
+@{ ViewData["Title"] = "Запишани студенти"; }
+
+<div>
+    <h4>Запишани студенти на предметот @Model.Title</h4>
+   
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Индекс</th>
+                    <th>Име</th>
+                    <th>Презиме</th>
+                    <th>Дата на запишување</th>
+                    <th>Семестар</th>
+                    <th>Степен</th>
+                </tr>
+                @foreach (var item in Model.Students)
+                {
+            <tr>
+                <td>
+                    <a asp-controller="Students" asp-action="Details" asp-route-id="@item.Student.Id">@Html.DisplayFor(modelItem => item.Student.StudentId)</a>
+                </td>
+                <td>
+                    @item.Student.FirstName
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.EnrollmentDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.CurrentSemestar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.EducationLevel)
+                </td>
+                <td>
+                    <a asp-controller="Enrollments" asp-action="TeacherEdit" asp-route-id="@item.Id">Промени</a> |
+                    <a asp-controller="Enrollments" asp-action="Details" asp-route-id="@item.Id">Детали</a> |
+                    <a asp-controller="Enrollments" asp-action="Delete" asp-route-id="@item.Id">Избриши</a>
+                </td>
+            </tr>}
+            </table>
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Промени</a> |
+    <a asp-controller="Teachers" asp-action="Index">Назад кон листата</a>
+</div>

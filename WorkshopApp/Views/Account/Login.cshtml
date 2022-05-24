@@ -1,0 +1,120 @@
+﻿@model WorkshopApp.ViewModels.Login
+
+@{ ViewData["Title"] = "Најава"; }
+
+<!--<h2>Најава на корисник</h2>
+<div class="text-danger" asp-validation-summary="All"></div>
+<hr />
+<div class="row">
+    <form asp-action="Login" method="post">
+        <div class="col-md-12">
+            <input type="hidden" asp-for="ReturnUrl" />
+            <div class="form-group">
+                <label for="Email">Email адреса</label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Password">Лозинка</label>
+                <input asp-for="Password" class="form-control" type="password" data-val="true" />
+            </div>
+            <hr />
+            <button class="btn btn-secondary" type="submit">Најави се</button>
+        </div>
+    </form>
+</div>-->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<style>
+
+    label{
+        color:white;
+    }
+.main-head{
+    height: 150px;
+    background: #FFF;
+
+}
+
+    .sidenav {
+        height: 100%;
+        background-color: #343a40;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+
+.main {
+    padding: 0px 10px;
+}
+
+
+    .sidenav {
+        width: 50%;
+        position: fixed;
+        z-index: 0;
+        top: 0;
+        margin-top: 3.57em;
+    
+        left: 0;
+    }
+
+    .login-form{
+        margin-top: 80%;
+       
+    }
+
+    .register-form{
+        margin-top: 20%;
+    }
+
+
+
+.login-main-text{
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+}
+
+.login-main-text h2{
+    font-weight: 300;
+}
+
+.btn-black{
+    background-color: #000 !important;
+    color: #fff;
+}
+</style>
+
+<div class="sidenav">
+
+    <div class="login-main-text">
+        <h2>WorkshoApp<br> Најава на корисник</h2>
+       
+    </div>
+</div>
+<div class="main">
+        <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+                <form asp-action="Login" method="post">
+                    <input type="hidden" asp-for="ReturnUrl" />
+                    <div class="form-group">
+                        <label>Email адреса</label>
+                        <input asp-for="Email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label>Лозинка</label>
+                        <input asp-for="Password" type="password" class="form-control" placeholder="Лозинка" data-val="true">
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Најави се</button>
+                   
+                </form>
+            </div>
+        </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
